@@ -246,6 +246,8 @@ public class MultiMenuManager : MonoBehaviour
     }
     public void OnCreatedRoom(SocketIOEvent socketIOEvent)
     {
+
+        Debug.Log("OnCreatedRoom issue here maybe" );
         Room room = Room.CreateFromJSON(socketIOEvent.data.ToString());
 
         //RoomWindow.SetActive(false);
@@ -319,8 +321,9 @@ public class MultiMenuManager : MonoBehaviour
 
     public void OnChangedBetAmount()
     {
-        
+
         var value = challengeBetAmount.text;
+        Debug.Log("OnChangedBetAmount value: ");
         Debug.Log(value);
         if(value=="")
             value="0";
@@ -333,7 +336,8 @@ public class MultiMenuManager : MonoBehaviour
     void GetRooms(SocketIOEvent socketIOEvent)
     {
         roomList = RoomList.CreateFromJSON(socketIOEvent.data.ToString());
-
+        Debug.Log("GetRooms roomList: ");
+        Debug.Log(roomList);
         DisplayRooms();
 
         Debug.Log(roomList.rooms);
@@ -342,6 +346,9 @@ public class MultiMenuManager : MonoBehaviour
     void GetUsers(SocketIOEvent socketIOEvent)
     {
         UserList userList = UserList.CreateFromJSON(socketIOEvent.data.ToString());
+
+        Debug.Log("GetUsers userList: ");
+        Debug.Log(userList);
 
         if (userList == null || userContent == null)
         {
@@ -391,7 +398,7 @@ public class MultiMenuManager : MonoBehaviour
             return;
         if (float.Parse(c_Bet_amount.text) > Global.balance)
             c_Bet_amount.text = Global.balance.ToString();
-        
+
         if (float.Parse(c_Bet_amount.text)<10)
             c_Bet_amount.text="0";
         //CreateRoomWindow.SetActive(false);
